@@ -23,6 +23,11 @@ float windspeed = 0;             //Velocidade do vento (km/h)
 LiquidCrystal_I2C lcd(0x27, 16, 2);  // Declara o endereço do Display I2C
 
 void anemometro(); //Função do anemometro do sistema
+void windvelocity(); //Função para medir velocidade do vento 
+void RPMcalc(); //Função para calcular o RPM
+void WindSpeed(); //Velocidade do vento em m/s
+void SpeedWind(); //Velocidade do vento em km/h
+void addcount(); //Incrementa contador
  
 void setup() {
   // Configura o Display I2C de acordo com a biblioteca
@@ -39,6 +44,9 @@ void setup() {
 }
  
 void loop() {
+
+  anemometro();
+  
   valor = analogRead(pin) * (5.0 / 1023.0); // Calcula a tensão
  
   lcd.clear();
@@ -51,66 +59,67 @@ void loop() {
   // Indica a posição norte
   if (valor <= 2.90) {
     Winddir = 0;
-    lcd.setCursor(7, 1);
+    lcd.setCursor(1, 1);
     lcd.print("Norte");
   }
  
  // Indica a posição noroeste
   else if (valor <= 3.05) {
     Winddir = 315;
-    lcd.setCursor(7, 1);
+    lcd.setCursor(1, 1);
     lcd.print("Noroeste");
   }
  
  // Indica a posição oeste
   else if (valor <= 3.25) {
     Winddir = 270;
-    lcd.setCursor(7, 1);
+    lcd.setCursor(1, 1);
     lcd.print("Oeste");
   }
  
  // Indica a posição sudoeste
   else if (valor <= 3.45) {
     Winddir = 225;
-    lcd.setCursor(7, 1);
+    lcd.setCursor(1, 1);
     lcd.print("Sudoeste");
   }
  
  // Indica a posição sul
   else if (valor <= 3.75) {
     Winddir = 180;
-    lcd.setCursor(7, 1);
+    lcd.setCursor(1, 1);
     lcd.print("Sul");
   }
  
  // Indica a posição sudeste
   else if (valor <= 4.00) {
     Winddir = 135;
-    lcd.setCursor(7, 1);
+    lcd.setCursor(1, 1);
     lcd.print("Sudeste");
   }
  
  // Indica a posição leste
   else if (valor <= 4.25) {
     Winddir = 90;
-    lcd.setCursor(7, 1);
+    lcd.setCursor(1, 1);
     lcd.print("Leste");
   }
  
  // Indica a posição nordeste
   else if (valor <= 4.65) {
     Winddir = 45;
-    lcd.setCursor(7, 1);
+    lcd.setCursor(1, 1);
     lcd.print("Nordeste");
   }
  
 // Caso nenhum valor seja compatível, imprime FAIL
   else {
     Winddir = 000;
-    lcd.setCursor(7, 1);
+    lcd.setCursor(1, 1);
     lcd.print("FAIL");
   }
- 
+
+ /*
  // Imprime os valores do Ângulo na linha 1
   lcd.setCursor(0, 0);
   lcd.print("Angulo: ");
@@ -121,6 +130,7 @@ void loop() {
   lcd.setCursor(0, 1);
   lcd.print("Vento: ");
   delay(5000);
+  */
 }
 
 
